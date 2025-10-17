@@ -250,3 +250,20 @@ export const filterByHandicapType = asyncHandler(async (req, res) => {
       .json({ message: "Something went wrong", error: error.message });
   }
 });
+
+//get biometricId by UID
+export const getBiometricIdByUID = asyncHandler(async(req, res) => {
+  try {
+    const { applicantAadhar } = req.body;
+    const user = await User.findOne({ applicantAadhar });
+    if (!applicantAadhar) {
+      return res.status(400).json({ message: " Please provide valid Aadhar number "});
+    } else {
+      res.status(200).json({
+        message: "Biometric ID fetched sucessfully", data: user.biometricId
+      });
+    }
+  } catch (error) { 
+    res.status(500).json({ message: "Something went wrong", error: error.message });
+  }
+});
