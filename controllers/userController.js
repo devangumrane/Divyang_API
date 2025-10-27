@@ -75,7 +75,7 @@ export const getUserByAadhar = asyncHandler(async (req, res) => {
       res
         .status(200)
         .json({ message: "Users fetched sucessfully", data: users });
-      console.log(users);
+      // console.log(users);
     }
   } catch (error) {
     res
@@ -94,7 +94,7 @@ export const deleteUserByAadhar = asyncHandler(async (req, res) => {
       return res.status(404).json({ message: "No user found" });
     } else {
       res.status(200).json({ message: "User deleted sucessfully" });
-      console.log(`${user.username} deleted sucessfully`);
+      // console.log(`${user.username} deleted sucessfully`);
     }
   } catch (error) {
     res
@@ -264,6 +264,19 @@ export const getBiometricIdByUID = asyncHandler(async(req, res) => {
       });
     }
   } catch (error) { 
+    res.status(500).json({ message: "Something went wrong", error: error.message });
+  }
+});
+
+//Get count of all users
+export const getAllUsers = asyncHandler(async (req, res) => {
+  try {
+    const userCount = await User.countDocuments();
+    res.status(200).json({
+      message: "User count fetched successfully",
+      data: userCount,
+    });
+  } catch (error) {
     res.status(500).json({ message: "Something went wrong", error: error.message });
   }
 });

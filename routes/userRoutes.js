@@ -1,5 +1,5 @@
 import express from "express";
-import { createApplicant, getUserByAadhaar, getUserAdharPhoto, getUserByAadhar, deleteUserByAadhar, getUserByName, updateUserByUID, getUserCount, pagination, userActivity, filterByHandicapType, getBiometricIdByUID } from "../controllers/userController.js";
+import { createApplicant, getUserByAadhaar, getUserAdharPhoto, getUserByAadhar, deleteUserByAadhar, getUserByName, updateUserByUID, getUserCount, pagination, userActivity, filterByHandicapType, getBiometricIdByUID, getAllUsers } from "../controllers/userController.js";
 
 //Router object
 const userRoutes = express.Router();
@@ -7,6 +7,7 @@ const userRoutes = express.Router();
 //User routes
 userRoutes.post("/createUser/:applicantAadhar", createApplicant);
 userRoutes.get("/getDataByUID", getUserByAadhaar);
+userRoutes.get("/getAllUsers", getAllUsers);
 userRoutes.get("/getAdharPhoto", getUserAdharPhoto);
 userRoutes.get("/searchByUID", getUserByAadhar);
 userRoutes.get("/getUserByName", getUserByName);
